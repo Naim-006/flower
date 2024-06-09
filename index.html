@@ -97,54 +97,54 @@
     </div>
 
     <audio id="bgMusic" loop>
-        <source src="background-music.mp3" type="audio/mpeg">
+        <source src="background.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <audio id="submitSound">
-        <source src="submit-sound.mp3" type="audio/mpeg">
+        <source src="submit.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <script>
-        // Play background music
-        const bgMusic = document.getElementById('bgMusic');
-        bgMusic.play();
+    const bgMusic = document.getElementById('bgMusic');
+    bgMusic.play();
 
-        document.getElementById('submitButton').addEventListener('click', function() {
-            const name = document.getElementById('nameInput').value.toLowerCase();
-            const flowerDiv = document.getElementById('flowerDiv');
-            const errorMessage = document.getElementById('errorMessage');
-            const culpritMessage = document.getElementById('culpritMessage');
-            const submitButton = document.getElementById('submitButton');
-            const submitSound = document.getElementById('submitSound');
+    document.getElementById('submitButton').addEventListener('click', function() {
+        const name = document.getElementById('nameInput').value.toLowerCase();
+        const flowerDiv = document.getElementById('flowerDiv');
+        const errorMessage = document.getElementById('errorMessage');
+        const culpritMessage = document.getElementById('culpritMessage');
+        const submitButton = document.getElementById('submitButton');
+        const submitSound = document.getElementById('submitSound');
 
-            // Play submit sound
-            submitSound.play();
+        submitSound.play();
 
-            // Show "Submitting..." on button for 4 seconds
-            submitButton.textContent = 'umm.. scanning you🤨';
-            submitButton.disabled = true;
+        submitButton.textContent = 'umm.. scanning you🤨';
+        submitButton.disabled = true;
 
-            setTimeout(() => {
-                if (name === 'mithi' || name === 'jannat') {
-                    flowerDiv.style.display = 'none';
-                    errorMessage.style.display = 'none';
-                    culpritMessage.style.display = 'block';
-                    bgMusic.pause(); // Stop background music
+        setTimeout(() => {
+            if (name === 'mithi' || name === 'jannat') {
+                flowerDiv.style.display = 'none';
+                errorMessage.style.display = 'none';
+                culpritMessage.style.display = 'block';
 
-                    setTimeout(() => {
-                        window.location.href = 'flower.html';
-                    }, 1000); // Wait for 3 seconds before redirecting
-                } else {
-                    flowerDiv.style.display = 'none';
-                    errorMessage.style.display = 'block';
-                    culpritMessage.style.display = 'none';
-                }
+                setTimeout(() => {
+                    window.location.href = 'flower.html';
+                }, 1000);
+            } else {
+                flowerDiv.style.display = 'none';
+                errorMessage.style.display = 'block';
+                culpritMessage.style.display = 'none';
+                setTimeout(() => {
+                    window.location.href = 'stranger.html';
+                }, 1000);
+            }
 
-                submitButton.textContent = 'scanning done';
-                submitButton.disabled = false;
-            }, 4000);
-        });
-    </script>
+            submitButton.textContent = 'scanning done';
+            submitButton.disabled = false;
+        }, 4000);
+    });
+</script>
+
 </body>
 </html>
