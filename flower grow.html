@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Input </title>
+    <link rel="icon" type="images/x-icon" href="" width="170%"height="100%"/>
+  
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url("https://cdn.pixabay.com/photo/2023/08/06/10/23/ai-generated-8172639_960_720.png");
+            background-size: cover;
+            overflow: hidden;
+        }
+        .container {
+            backdrop-filter: blur(7px);
+            border: 2px solid white;
+            padding: 60px;
+            border-radius: 14px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: rgb(8, 8, 151);
+            z-index: 10;
+            position: relative;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #3c3c3c;
+            border-radius: 20px;
+            width: calc(100% - 24px);
+            margin-bottom: 15px;
+            margin-top: 10px;
+            color: rgb(4, 55, 99);
+            background-color: transparent;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: transparent;
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 15px;
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:disabled {
+            background-color: transparent;
+        }
+        .falling-object {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+        .leaf {
+            background-color: green;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        #errorMessage {
+            color: rgb(255, 0, 0);
+            display: none;
+            margin-top: 30px;
+        }
+        #culpritMessage {
+            display: none;
+            margin-top: 20px;
+            color: rgb(255, 0, 0);
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Enter Your Name</h1>
+        <input type="text" id="nameInput" placeholder="Name">
+        <button id="submitButton">Submit</button>
+        <div id="flowerDiv"></div>
+        <div id="errorMessage">Incorrect name</div>
+        <div id="culpritMessage">So you are the culprit</div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="background-music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="submitSound">
+        <source src="submit-sound.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        // Play background music
+        const bgMusic = document.getElementById('bgMusic');
+        bgMusic.play();
+
+        document.getElementById('submitButton').addEventListener('click', function() {
+            const name = document.getElementById('nameInput').value.toLowerCase();
+            const flowerDiv = document.getElementById('flowerDiv');
+            const errorMessage = document.getElementById('errorMessage');
+            const culpritMessage = document.getElementById('culpritMessage');
+            const submitButton = document.getElementById('submitButton');
+            const submitSound = document.getElementById('submitSound');
+
+            // Play submit sound
+            submitSound.play();
+
+            // Show "Submitting..." on button for 4 seconds
+            submitButton.textContent = 'umm.. scanning you🤨';
+            submitButton.disabled = true;
+
+            setTimeout(() => {
+                if (name === 'mithi' || name === 'jannat') {
+                    flowerDiv.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                    culpritMessage.style.display = 'block';
+                    bgMusic.pause(); // Stop background music
+
+                    setTimeout(() => {
+                        window.location.href = 'flower.html';
+                    }, 3000); // Wait for 3 seconds before redirecting
+                } else {
+                    flowerDiv.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    culpritMessage.style.display = 'none';
+                }
+
+                submitButton.textContent = 'scanning done';
+                submitButton.disabled = false;
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
