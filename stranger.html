@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stranger Animation</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .text {
+    font-size: 3em;
+    color: white;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    animation: fadeText 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes fadeText {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.5;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="text">HI <span id="username">THERE</span>! DON'T TRUST ANYONE.</div>
+</div>
+
+<script>
+  // Get user's profile information using Chrome Identity API
+  chrome.identity.getProfileUserInfo(function(userInfo) {
+    if(userInfo.email) {
+      var username = userInfo.email.split('@')[0]; // Use the username part of the email
+      document.getElementById("username").textContent = username.toUpperCase();
+    }
+  });
+</script>
+
+</body>
+</html>
