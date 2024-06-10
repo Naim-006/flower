@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Name Input </title>
-    <link rel="icon" type="images/x-icon" href="img.jpg" width="170%"height="100%"/>
-  
+    <link rel="icon" type="images/x-icon" href="img.jpg" width="170%" height="100%"/>
 
     <style>
         body {
@@ -81,25 +80,12 @@
         #culpritMessage {
             display: none;
             margin-top: 20px;
-            color:lime;
+            color: lime;
             font-size: 24px;
-        }
-         #introVideo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 20;
         }
     </style>
 </head>
 <body>
-     <video id="introVideo" autoplay muted>
-        <source src="logon.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
     <div class="container">
         <h1>Enter Your Name</h1>
         <input type="text" id="nameInput" placeholder="Name" required>
@@ -119,62 +105,49 @@
     </audio>
 
     <script>
-          window.onload = function() {
-            const bgMusic = document.getElementById('bgMusic');
-            bgMusic.play();
-            
-            const introVideo = document.getElementById('introVideo');
-            const mainContent = document.getElementById('mainContent');
+    document.addEventListener('DOMContentLoaded', function() {
+        const bgMusic = document.getElementById('bgMusic');
+        const submitButton = document.getElementById('submitButton');
+
+        submitButton.addEventListener('click', function() {
+            const name = document.getElementById('nameInput').value.toLowerCase();
+            const flowerDiv = document.getElementById('flowerDiv');
+            const errorMessage = document.getElementById('errorMessage');
+            const culpritMessage = document.getElementById('culpritMessage');
+            const submitSound = document.getElementById('submitSound');
+
+            bgMusic.play(); // Play background music on user interaction
+            submitSound.play();
+
+            submitButton.textContent = 'umm.. scanning you🤨';
+            submitButton.disabled = true;
 
             setTimeout(() => {
-                introVideo.style.display = 'none';
-                mainContent.style.display = 'block';
-            }, 10000);
+                if (name === 'mithi' || name === 'jannat' || name === 'naim'
+                   || name === 'siam' || name === 'tasnim' || name === 'afnan'
+                   || name === '' || name === '' || name === '') {
+                    flowerDiv.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                    culpritMessage.style.display = 'block';
 
-  window.onload = function() {
-    const bgMusic = document.getElementById('bgMusic');
-    bgMusic.play();
+                    setTimeout(() => {
+                        window.location.href = 'flower.html';
+                    }, 1000);
+                } else {
+                    flowerDiv.style.display = 'none';
+                    errorMessage.style.display = 'block';
+                    culpritMessage.style.display = 'none';
+                    setTimeout(() => {
+                        window.location.href = 'stranger.html';
+                    }, 1000);
+                }
 
-    document.getElementById('submitButton').addEventListener('click', function() {
-        const name = document.getElementById('nameInput').value.toLowerCase();
-        const flowerDiv = document.getElementById('flowerDiv');
-        const errorMessage = document.getElementById('errorMessage');
-        const culpritMessage = document.getElementById('culpritMessage');
-        const submitButton = document.getElementById('submitButton');
-        const submitSound = document.getElementById('submitSound');
-
-        submitSound.play();
-
-        submitButton.textContent = 'umm.. scanning you🤨';
-        submitButton.disabled = true;
-
-        setTimeout(() => {
-            if (name === 'mithi' || name === 'jannat'|| name === 'naim'
-               || name === 'siam'|| name === 'tasnim'|| name === 'afnan'
-               || name === ''|| name === ''|| name === '') {
-                flowerDiv.style.display = 'none';
-                errorMessage.style.display = 'none';
-                culpritMessage.style.display = 'block';
-
-                setTimeout(() => {
-                    window.location.href = 'flower.html';
-                }, 1000);
-            } else {
-                flowerDiv.style.display = 'none';
-                errorMessage.style.display = 'block';
-                culpritMessage.style.display = 'none';
-                setTimeout(() => {
-                    window.location.href = 'stranger.html';
-                }, 1000);
-            }
-
-            submitButton.textContent = 'scanning done';
-            submitButton.disabled = false;
-        }, 4000);
+                submitButton.textContent = 'scanning done';
+                submitButton.disabled = false;
+            }, 4000);
+        });
     });
-};
-
-</script>
+    </script>
 
 </body>
 </html>
