@@ -84,16 +84,29 @@
             color:lime;
             font-size: 24px;
         }
+         #introVideo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 20;
+        }
     </style>
 </head>
 <body>
+     <video id="introVideo" autoplay muted>
+        <source src="logon.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <div class="container">
         <h1>Enter Your Name</h1>
         <input type="text" id="nameInput" placeholder="Name" required>
         <button id="submitButton">Submit</button>
         <div id="flowerDiv"></div>
         <div id="errorMessage">Incorrect name</div>
-        <div id="culpritMessage">So you are the Alcicek</div>
+        <div id="culpritMessage">So you are the Blackship √</div>
     </div>
 
     <audio id="bgMusic" loop>
@@ -106,6 +119,18 @@
     </audio>
 
     <script>
+          window.onload = function() {
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.play();
+            
+            const introVideo = document.getElementById('introVideo');
+            const mainContent = document.getElementById('mainContent');
+
+            setTimeout(() => {
+                introVideo.style.display = 'none';
+                mainContent.style.display = 'block';
+            }, 6000);
+
   window.onload = function() {
     const bgMusic = document.getElementById('bgMusic');
     bgMusic.play();
